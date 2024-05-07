@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Model Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("https://www.adotrip.com/public/images/areas/5c3eb997c4a93-Sukhna%20Lake%20Place%20to%20visit.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            min-height: 100vh; /* Ensure the background covers the entire viewport */
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+            margin-bottom: 50px; /* Add some bottom margin */
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0000ff; /* Blue text color */
+            background-color: rgba(255, 255, 255, 0.7); /* Transparent white background */
+            padding: 10px; /* Add some padding to the text */
+            text-transform: uppercase;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ff4500; /* Orange text color */
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #008000; /* Green text color */
+        }
+
+        .options {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .options p {
+            margin: 5px 0;
+        }
+
+        .options span {
+            font-weight: bold;
+        }
+
+        .predict-again {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .predict-again button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ML Model Result</h1>
+        <div class="result">
+            {% if prediction %}
+                <h2>The predicted price for the given area, property type, and Furnishing is:</h2>
+                <p>{{ prediction|round|int }} Rupees</p>
+            {% endif %}
+        </div>
+        <div class="options">
+            <p><span>Area:</span> {{ area }} SquareFeet</p>
+            <p><span>Property Type:</span> {% if new_resale == '0' %}New{% else %}Resale{% endif %}</p>
+            <p><span>Furnished:</span> {% if new_resale == '0' %}{% if furnished == '0' %}No{% else %}Yes{% endif %}{% else %}{% if furnished == '0' %}No{% else %}Yes{% endif %}{% endif %}</p>
+        </div>
+        <div class="predict-again">
+            <button onclick="window.location.href = '/';">Predict for Another Property</button>
+        </div>
+    </div>
+</body>
+</html>
